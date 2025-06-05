@@ -1,0 +1,477 @@
+{
+  "sections": [
+    {
+      "id": "qi",
+      "title": "気の不調チェック",
+      "children": [
+        {
+          "id": "qi_deficiency",
+          "label": "疲れやすいと感じますか？",
+          "type": "binary",
+          "score": {
+            "気虚": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "qi_def_time",
+                "label": "いつ疲れを感じやすいですか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "朝から",
+                    "score": {
+                      "気虚": 1
+                    }
+                  },
+                  {
+                    "text": "食後に",
+                    "score": {
+                      "脾の不調": 1
+                    }
+                  },
+                  {
+                    "text": "夕方以降",
+                    "score": {
+                      "血虚": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              },
+              {
+                "id": "qi_def_signs",
+                "label": "以下の症状はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "息切れしやすい",
+                    "score": {
+                      "肺の不調": 1
+                    }
+                  },
+                  {
+                    "text": "声に力がない",
+                    "score": {
+                      "気虚": 1
+                    }
+                  },
+                  {
+                    "text": "食後に眠くなる",
+                    "score": {
+                      "脾の不調": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "qi_stagnation",
+          "label": "イライラしやすい、胸やお腹がつかえる感じはありますか？",
+          "type": "binary",
+          "score": {
+            "気滞": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "qi_stag_symptoms",
+                "label": "次の症状はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "ため息をよくつく",
+                    "score": {
+                      "気滞": 1
+                    }
+                  },
+                  {
+                    "text": "月経前に不調がある",
+                    "score": {
+                      "肝の不調": 1
+                    }
+                  },
+                  {
+                    "text": "胸や喉に違和感",
+                    "score": {
+                      "気滞": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "blood",
+      "title": "血の不調チェック",
+      "children": [
+        {
+          "id": "blood_deficiency",
+          "label": "顔色が青白い、めまいがしやすいですか？",
+          "type": "binary",
+          "score": {
+            "血虚": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "blood_def_signs",
+                "label": "他に当てはまるものはありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "爪が割れやすい",
+                    "score": {
+                      "肝の不調": 1
+                    }
+                  },
+                  {
+                    "text": "動悸がある",
+                    "score": {
+                      "心の不調": 1
+                    }
+                  },
+                  {
+                    "text": "夢をよく見る",
+                    "score": {
+                      "血虚": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "blood_stasis",
+          "label": "肩こりや生理痛がひどいなど、血の巡りが悪いと感じることはありますか？",
+          "type": "binary",
+          "score": {
+            "瘀血": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "blood_stasis_signs",
+                "label": "以下の状態はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "刺すような痛み",
+                    "score": {
+                      "瘀血": 1
+                    }
+                  },
+                  {
+                    "text": "経血に血塊が多い",
+                    "score": {
+                      "瘀血": 1
+                    }
+                  },
+                  {
+                    "text": "シミやくすみが目立つ",
+                    "score": {
+                      "瘀血": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "fluid",
+      "title": "水の不調チェック",
+      "children": [
+        {
+          "id": "fluid_retention",
+          "label": "むくみやすい、胃がぽちゃぽちゃすることはありますか？",
+          "type": "binary",
+          "score": {
+            "水滞": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "fluid_retention_signs",
+                "label": "どのような症状がありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "雨の日に体調が悪い",
+                    "score": {
+                      "水滞": 1
+                    }
+                  },
+                  {
+                    "text": "下痢や軟便になりやすい",
+                    "score": {
+                      "脾の不調": 1
+                    }
+                  },
+                  {
+                    "text": "舌に歯型がある",
+                    "score": {
+                      "水滞": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "organs",
+      "title": "五臓チェック",
+      "children": [
+        {
+          "id": "liver",
+          "label": "感情の波が激しい、目の疲れやすさはありますか？",
+          "type": "binary",
+          "score": {
+            "肝の不調": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "liver_signs",
+                "label": "以下はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "怒りっぽい",
+                    "score": {
+                      "肝の不調": 1
+                    }
+                  },
+                  {
+                    "text": "目が乾く、かすむ",
+                    "score": {
+                      "肝の不調": 1
+                    }
+                  },
+                  {
+                    "text": "月経不順",
+                    "score": {
+                      "肝の不調": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "heart",
+          "label": "不安感が強い、よく夢を見るなど睡眠の不調を感じますか？",
+          "type": "binary",
+          "score": {
+            "心の不調": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "heart_signs",
+                "label": "以下はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "動悸がする",
+                    "score": {
+                      "心の不調": 1
+                    }
+                  },
+                  {
+                    "text": "眠りが浅い",
+                    "score": {
+                      "心の不調": 1
+                    }
+                  },
+                  {
+                    "text": "多夢",
+                    "score": {
+                      "心の不調": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "spleen",
+          "label": "食欲がない、軟便になりやすいですか？",
+          "type": "binary",
+          "score": {
+            "脾の不調": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "spleen_signs",
+                "label": "以下はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "食欲がない、または食べたくないことがよくある",
+                    "score": {
+                      "脾の不調": 1
+                    }
+                  },
+                  {
+                    "text": "下痢・軟便になりやすい",
+                    "score": {
+                      "脾の不調": 1
+                    }
+                  },
+                  {
+                    "text": "食後すぐにお腹がもたれる",
+                    "score": {
+                      "脾の不調": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "lung",
+          "label": "風邪をひきやすい、肌が乾燥しやすいですか？",
+          "type": "binary",
+          "score": {
+            "肺の不調": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "lung_signs",
+                "label": "以下はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "空咳",
+                    "score": {
+                      "肺の不調": 1
+                    }
+                  },
+                  {
+                    "text": "肌が乾燥する",
+                    "score": {
+                      "肺の不調": 1
+                    }
+                  },
+                  {
+                    "text": "鼻水や鼻づまり",
+                    "score": {
+                      "肺の不調": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "id": "kidney",
+          "label": "下半身が冷えやすい、足腰がだるくなることがありますか？",
+          "type": "binary",
+          "score": {
+            "腎の不調": 1
+          },
+          "follow_up": {
+            "condition": "yes",
+            "questions": [
+              {
+                "id": "kidney_signs",
+                "label": "以下はありますか？",
+                "type": "multi",
+                "options": [
+                  {
+                    "text": "頻尿・夜間尿がある",
+                    "score": {
+                      "腎の不調": 1
+                    }
+                  },
+                  {
+                    "text": "足腰のだるさがある",
+                    "score": {
+                      "腎の不調": 1
+                    }
+                  },
+                  {
+                    "text": "耳鳴り・聴力低下がある",
+                    "score": {
+                      "腎の不調": 1
+                    }
+                  },
+                  {
+                    "text": "どれも当てはまらない",
+                    "score": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
