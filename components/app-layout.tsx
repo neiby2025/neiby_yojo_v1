@@ -19,6 +19,7 @@ interface AppLayoutProps {
   isLoggedIn?: boolean
   onLogout?: () => void
   onLogin?: (user: { email: string; name?: string }) => void
+  onStartQuestionnaire?: () => void
 }
 
 export default function AppLayout({
@@ -28,6 +29,7 @@ export default function AppLayout({
   isLoggedIn = false,
   onLogout,
   onLogin,
+  onStartQuestionnaire,
 }: AppLayoutProps) {
   const [currentPage, setCurrentPage] = useState(initialPage)
 
@@ -54,6 +56,13 @@ export default function AppLayout({
       }
       return
     }
+
+    if (page === "initial-questionnaire" && onStartQuestionnaire) {
+      // 問診開始の場合は親コンポーネントに通知
+      onStartQuestionnaire()
+      return
+    }
+
     setCurrentPage(page)
   }
 
@@ -77,14 +86,20 @@ export default function AppLayout({
       case "history":
         return <HistoryPage />
       case "initial-questionnaire":
-        return <InitialQuestionnaire />
+        return <InitialQuestionnaire handleNavigation={handleNavigation} />
       case "user-registration":
         return <UserRegistrationPage handleNavigation={handleNavigation} onRegister={handleLogin} />
       case "login":
         return <LoginPage handleNavigation={handleNavigation} onLogin={handleLogin} />
       case "dashboard":
       default:
-        return <Dashboard onNavigate={handleNavigation} currentUser={currentUser} />
+        return (
+          <Dashboard
+            onNavigate={handleNavigation}
+            currentUser={currentUser}
+            onStartQuestionnaire={onStartQuestionnaire}
+          />
+        )
     }
   }
 
@@ -193,8 +208,12 @@ function SettingsPage() {
   )
 }
 
+interface InitialQuestionnaireProps {
+  handleNavigation: (page: string) => void
+}
+
 // 初回問診ページ
-function InitialQuestionnaire() {
+function InitialQuestionnaire({ handleNavigation }: InitialQuestionnaireProps) {
   return (
     <div className="container mx-auto px-4 py-8 max-w-md">
       <div className="text-center mb-8">
@@ -216,7 +235,7 @@ function InitialQuestionnaire() {
             所要時間は約5-10分です。
           </p>
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => handleNavigation("initial-questionnaire")}
             className="w-full h-14 text-lg bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md transition-all duration-200 hover:shadow-lg"
           >
             問診を開始する

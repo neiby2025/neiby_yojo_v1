@@ -7,10 +7,10 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "r
 interface ResultsScreenProps {
   scores: Record<string, number>
   onSaveCallback?: () => void
-  onViewWellness?: () => void
+  onRetakeQuiz?: () => void
 }
 
-export default function ResultsScreen({ scores, onSaveCallback, onViewWellness }: ResultsScreenProps) {
+export default function ResultsScreen({ scores, onSaveCallback, onRetakeQuiz }: ResultsScreenProps) {
   // 気血水のデータ
   const qiBloodFluidData = [
     {
@@ -268,10 +268,10 @@ export default function ResultsScreen({ scores, onSaveCallback, onViewWellness }
       {/* アクションボタン */}
       <div className="space-y-3">
         <button
-          onClick={onViewWellness}
+          onClick={onRetakeQuiz}
           className="w-full h-14 text-lg bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md transition-all duration-200 hover:shadow-lg"
         >
-          養生法を見る
+          もう一度体質チェックをする
         </button>
         <button
           onClick={onSaveCallback}

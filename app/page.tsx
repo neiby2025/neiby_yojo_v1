@@ -121,17 +121,26 @@ export default function HealthCheckApp() {
     })
   }
 
-  // ログイン後はダッシュボードを表示
-  if (currentStep.type === "dashboard") {
-    return (
-      <AppLayout
-        currentUser={currentUser}
-        initialPage="dashboard"
-        isLoggedIn={isLoggedIn}
-        onLogout={handleLogout}
-        onLogin={handleLogin}
-      />
-    )
+  const startQuestionnaire = () => {
+    console.log("問診を開始します...")
+    // 問診データをクリア
+    setAnswers({})
+    setComplaint("")
+    // 問診の最初の質問に遷移
+    setCurrentStep({
+      type: "main",
+      sectionIndex: 0,
+      questionIndex: 0,
+    })
+    console.log("問診画面に遷移しました")
+  }
+
+  const backToDashboard = () => {
+    setCurrentStep({
+      type: "dashboard",
+      sectionIndex: 0,
+      questionIndex: 0,
+    })
   }
 
   // 全ての質問数を計算
@@ -249,6 +258,9 @@ export default function HealthCheckApp() {
           sectionIndex: prevSectionIndex,
           questionIndex: prevSection.children.length - 1,
         })
+      } else {
+        // 最初の質問の場合、ダッシュボードに戻る
+        backToDashboard()
       }
     } else if (currentStep.type === "complaint") {
       // 主訴入力画面の場合、最後の質問に戻る
@@ -434,15 +446,13 @@ export default function HealthCheckApp() {
                   いいえ
                 </Button>
                 {/* 戻るボタン */}
-                {(currentStep.questionIndex > 0 || currentStep.sectionIndex > 0) && (
-                  <Button
-                    onClick={handleGoBack}
-                    variant="ghost"
-                    className="w-full h-10 text-sm text-slate-500 hover:text-slate-700 mt-4"
-                  >
-                    ← 1つ前の質問に戻る
-                  </Button>
-                )}
+                <Button
+                  onClick={handleGoBack}
+                  variant="ghost"
+                  className="w-full h-10 text-sm text-slate-500 hover:text-slate-700 mt-4"
+                >
+                  ← 前に戻る
+                </Button>
               </div>
             ) : (
               <div className="space-y-6">
@@ -475,15 +485,13 @@ export default function HealthCheckApp() {
                   次へ進む
                 </Button>
                 {/* 戻るボタン */}
-                {(currentStep.questionIndex > 0 || currentStep.sectionIndex > 0 || currentStep.type === "followup") && (
-                  <Button
-                    onClick={handleGoBack}
-                    variant="ghost"
-                    className="w-full h-10 text-sm text-slate-500 hover:text-slate-700 mt-2"
-                  >
-                    ← 1つ前の質問に戻る
-                  </Button>
-                )}
+                <Button
+                  onClick={handleGoBack}
+                  variant="ghost"
+                  className="w-full h-10 text-sm text-slate-500 hover:text-slate-700 mt-2"
+                >
+                  ← 前に戻る
+                </Button>
               </div>
             )}
           </CardContent>
@@ -519,7 +527,7 @@ export default function HealthCheckApp() {
             variant="ghost"
             className="w-full h-10 text-sm text-slate-500 hover:text-slate-700 mt-2"
           >
-            ← 1つ前の質問に戻る
+            ← 前に戻る
           </Button>
         </CardContent>
       </Card>
@@ -560,68 +568,76 @@ export default function HealthCheckApp() {
     return (
       <ResultsScreen
         scores={calculateResults()}
+        onRetakeQuiz={startQuestionnaire}
         /*onSaveCallback={() => setCurrentStep({ type: "signup", sectionIndex: 0, questionIndex: 0 })}*/
       />
     )
   }
 
+  // ダッシュボード表示の条件
+  if (currentStep.type === "dashboard") {
+    return (
+      <AppLayout
+        currentUser={currentUser}
+        initialPage="dashboard"
+        isLoggedIn={isLoggedIn}
+        onLogout={handleLogout}
+        onLogin={handleLogin}
+        onStartQuestionnaire={startQuestionnaire}
+      />
+    )
+  }
+
+  // 問診画面の表示
   return (
-    <AppLayout
-      currentUser={currentUser}
-      initialPage="initial-questionnaire"
-      isLoggedIn={isLoggedIn}
-      onLogout={handleLogout}
-      onLogin={handleLogin}
-    >
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <div className="container mx-auto px-4 py-8 max-w-md">
-          {/* ヘッダー */}
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-slate-800 mb-2">🌿 養生アプリ 初回問診フォーム</h1>
-            <p className="text-slate-600 leading-relaxed">
-              現在の体の状態をチェックして、
-              <br />
-              結果を保存しましょう
-            </p>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <div className="container mx-auto px-4 py-8 max-w-md">
+        {/* ヘッダー */}
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-bold text-slate-800 mb-2">🌿 養生アプリ 初回問診フォーム</h1>
+          <p className="text-slate-600 leading-relaxed">
+            現在の体の状態をチェックして、
+            <br />
+            結果を保存しましょう
+          </p>
+        </div>
 
-          {/* プログレスバー */}
-          <div className="mb-8">
-            <div className="flex justify-between text-sm text-slate-600 mb-2">
-              <span>進捗状況</span>
-              <span>{Math.round(getCurrentProgress())}%</span>
-            </div>
-            <Progress value={getCurrentProgress()} className="h-3 bg-slate-200" />
+        {/* プログレスバー */}
+        <div className="mb-8">
+          <div className="flex justify-between text-sm text-slate-600 mb-2">
+            <span>進捗状況</span>
+            <span>{Math.round(getCurrentProgress())}%</span>
           </div>
+          <Progress value={getCurrentProgress()} className="h-3 bg-slate-200" />
+        </div>
 
-          {/* 質問エリア */}
-          <div className="mb-8">
-            {currentStep.type === "main" || currentStep.type === "followup" ? (
-              renderQuestion()
-            ) : currentStep.type === "complaint" ? (
-              renderComplaint()
-            ) : currentStep.type === "results" ? (
-              renderResults()
-            ) : currentStep.type === "signup" ? (
-              <SignupScreen
-                onSignUp={handleSignUp}
-                onBack={() => setCurrentStep({ type: "results", sectionIndex: 0, questionIndex: 0 })}
-              />
-            ) : (
-              renderComplete()
-            )}
-          </div>
-
-          {/* セクション表示 */}
-          {(currentStep.type === "main" || currentStep.type === "followup") && (
-            <div className="text-center">
-              <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                {data.sections[currentStep.sectionIndex]?.title}
-              </div>
-            </div>
+        {/* 質問エリア */}
+        <div className="mb-8">
+          {currentStep.type === "main" || currentStep.type === "followup" ? (
+            renderQuestion()
+          ) : currentStep.type === "complaint" ? (
+            renderComplaint()
+          ) : currentStep.type === "results" ? (
+            renderResults()
+          ) : currentStep.type === "signup" ? (
+            <SignupScreen
+              onSignUp={handleSignUp}
+              onBack={() => setCurrentStep({ type: "results", sectionIndex: 0, questionIndex: 0 })}
+            />
+          ) : (
+            renderComplete()
           )}
         </div>
+
+        {/* セクション表示 */}
+        {(currentStep.type === "main" || currentStep.type === "followup") && (
+          <div className="text-center">
+            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+              {data.sections[currentStep.sectionIndex]?.title}
+            </div>
+          </div>
+        )}
       </div>
-    </AppLayout>
+    </div>
   )
 }

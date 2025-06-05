@@ -1,0 +1,126 @@
+{
+  "tongue_diagnosis_patterns": {
+    "tongue_color": {
+      "淡白": {
+        "description": "舌の色が薄く白っぽい",
+        "constitution": ["気虚", "血虚", "陽虚"],
+        "meaning": "気血不足、陽気不足"
+      },
+      "淡紅": {
+        "description": "正常な薄いピンク色",
+        "constitution": [],
+        "meaning": "正常な状態"
+      },
+      "紅": {
+        "description": "舌の色が赤い",
+        "constitution": ["陰虚", "血熱"],
+        "meaning": "熱証、陰液不足"
+      },
+      "絳": {
+        "description": "舌の色が深い赤色",
+        "constitution": ["血熱", "陰虚"],
+        "meaning": "熱盛、陰虚火旺"
+      },
+      "紫": {
+        "description": "舌の色が紫色",
+        "constitution": ["瘀血", "寒証"],
+        "meaning": "血行不良、寒証"
+      }
+    },
+    "tongue_shape": {
+      "胖大": {
+        "description": "舌が腫れぼったく大きい",
+        "constitution": ["脾虚", "湿証"],
+        "meaning": "脾の運化機能低下、水湿停滞"
+      },
+      "痩薄": {
+        "description": "舌が薄く小さい",
+        "constitution": ["陰虚", "血虚"],
+        "meaning": "陰血不足"
+      },
+      "歯痕": {
+        "description": "舌の縁に歯の跡がある",
+        "constitution": ["脾虚", "気虚"],
+        "meaning": "脾気虚、水湿内停"
+      },
+      "裂紋": {
+        "description": "舌に亀裂がある",
+        "constitution": ["陰虚", "血虚"],
+        "meaning": "陰液不足、血虚"
+      },
+      "瘀点": {
+        "description": "舌に紫色の斑点がある",
+        "constitution": ["瘀血"],
+        "meaning": "血行障害"
+      }
+    },
+    "tongue_coating": {
+      "白苔": {
+        "薄白": {
+          "description": "薄い白い苔",
+          "constitution": [],
+          "meaning": "正常または軽度の寒証"
+        },
+        "厚白": {
+          "description": "厚い白い苔",
+          "constitution": ["寒湿", "痰湿"],
+          "meaning": "寒湿内盛、痰湿停滞"
+        }
+      },
+      "黄苔": {
+        "薄黄": {
+          "description": "薄い黄色い苔",
+          "constitution": ["熱証"],
+          "meaning": "軽度の熱証"
+        },
+        "厚黄": {
+          "description": "厚い黄色い苔",
+          "constitution": ["湿熱", "痰熱"],
+          "meaning": "湿熱内蘊、痰熱互結"
+        }
+      },
+      "無苔": {
+        "description": "舌苔がほとんどない",
+        "constitution": ["陰虚", "胃陰虚"],
+        "meaning": "陰液不足、胃陰虚"
+      },
+      "膩苔": {
+        "description": "ねっとりとした苔",
+        "constitution": ["痰湿", "湿熱"],
+        "meaning": "痰湿内停"
+      }
+    }
+  },
+  "constitution_advice": {
+    "気虚": {
+      "foods": ["山芋", "なつめ", "鶏肉", "もち米"],
+      "avoid": ["生冷食品", "過度な運動"],
+      "lifestyle": ["十分な休息", "規則正しい生活"]
+    },
+    "血虚": {
+      "foods": ["ほうれん草", "レバー", "黒ごま", "クコの実"],
+      "avoid": ["目の酷使", "夜更かし"],
+      "lifestyle": ["質の良い睡眠", "適度な運動"]
+    },
+    "陰虚": {
+      "foods": ["白木耳", "百合根", "梨", "蓮の実"],
+      "avoid": ["辛い食べ物", "過労"],
+      "lifestyle": ["潤いを保つ", "ストレス管理"]
+    },
+    "陽虚": {
+      "foods": ["生姜", "シナモン", "羊肉", "くるみ"],
+      "avoid": ["冷たい食べ物", "薄着"],
+      "lifestyle": ["体を温める", "適度な運動"]
+    },
+    "湿証": {
+      "foods": ["はと麦", "冬瓜", "小豆", "とうもろこし"],
+      "avoid": ["甘い物", "油っこい食べ物"],
+      "lifestyle": ["除湿", "軽い運動"]
+    },
+    "瘀血": {
+      "foods": ["玉ねぎ", "にんにく", "青魚", "黒豆"],
+      "avoid": ["冷え", "長時間同じ姿勢"],
+      "lifestyle": ["血行促進", "適度な運動"]
+    }
+  }
+}

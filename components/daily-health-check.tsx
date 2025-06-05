@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Slider } from "@/components/ui/slider"
 import { Progress } from "@/components/ui/progress"
 import dailyCheckData from "../data/daily-check.json"
+import TongueDiagnosis from "./tongue-diagnosis"
 
 interface Option {
   text: string
@@ -30,7 +31,7 @@ interface DailyCheckData {
   sections: Section[]
 }
 
-type StepType = "questions" | "wellness" | "advice" | "complete"
+type StepType = "questions" | "wellness" | "tongue" | "advice" | "complete"
 
 export default function DailyHealthCheck() {
   const [currentStep, setCurrentStep] = useState<StepType>("questions")
@@ -41,6 +42,7 @@ export default function DailyHealthCheck() {
   const [freeText, setFreeText] = useState("")
   const [isAnimating, setIsAnimating] = useState(false)
   const [advice, setAdvice] = useState("")
+  const [tongueDiagnosis, setTongueDiagnosis] = useState<any>(null)
 
   const data = dailyCheckData as DailyCheckData
   const questions = data.sections[0].questions
@@ -121,12 +123,30 @@ export default function DailyHealthCheck() {
   const handleWellnessSubmit = async () => {
     setIsAnimating(true)
     await new Promise((resolve) => setTimeout(resolve, 500))
+    setCurrentStep("tongue")
+    setIsAnimating(false)
+  }
+
+  const handleTongueDiagnosisComplete = async (diagnosis: any) => {
+    setTongueDiagnosis(diagnosis)
+    setIsAnimating(true)
+    await new Promise((resolve) => setTimeout(resolve, 500))
 
     const scores = calculateScores()
     const generatedAdvice = generateAdvice(scores)
     setAdvice(generatedAdvice)
     setCurrentStep("advice")
+    setIsAnimating(false)
+  }
 
+  const handleTongueSkip = async () => {
+    setIsAnimating(true)
+    await new Promise((resolve) => setTimeout(resolve, 500))
+
+    const scores = calculateScores()
+    const generatedAdvice = generateAdvice(scores)
+    setAdvice(generatedAdvice)
+    setCurrentStep("advice")
     setIsAnimating(false)
   }
 
@@ -141,6 +161,7 @@ export default function DailyHealthCheck() {
       mindCondition: mindCondition[0],
       freeText,
       scores: calculateScores(),
+      tongueDiagnosis, // 舌診結果を追加
     })
 
     setCurrentStep("complete")
@@ -258,7 +279,7 @@ export default function DailyHealthCheck() {
             onClick={handleWellnessSubmit}
             className="w-full h-14 text-lg bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-md transition-all duration-200 hover:shadow-lg"
           >
-            アドバイスを見る
+            次へ
           </Button>
         </CardContent>
       </Card>
@@ -321,9 +342,11 @@ export default function DailyHealthCheck() {
 
   const getProgress = () => {
     if (currentStep === "questions") {
-      return ((currentQuestionIndex + 1) / questions.length) * 50
+      return ((currentQuestionIndex + 1) / questions.length) * 40
     } else if (currentStep === "wellness") {
-      return 75
+      return 60
+    } else if (currentStep === "tongue") {
+      return 80
     } else if (currentStep === "advice") {
       return 90
     } else {
@@ -357,6 +380,9 @@ export default function DailyHealthCheck() {
         <div className="mb-8">
           {currentStep === "questions" && renderQuestion()}
           {currentStep === "wellness" && renderWellness()}
+          {currentStep === "tongue" && (
+            <TongueDiagnosis onDiagnosisComplete={handleTongueDiagnosisComplete} onSkip={handleTongueSkip} />
+          )}
           {currentStep === "advice" && renderAdvice()}
           {currentStep === "complete" && renderComplete()}
         </div>

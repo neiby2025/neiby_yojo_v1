@@ -11,9 +11,10 @@ interface DashboardProps {
     email: string
     name?: string
   }
+  onStartQuestionnaire?: () => void
 }
 
-export default function Dashboard({ onNavigate, currentUser }: DashboardProps) {
+export default function Dashboard({ onNavigate, currentUser, onStartQuestionnaire }: DashboardProps) {
   // サンプルデータ（実際のアプリでは API から取得）
   const [recentChecks] = useState([
     { date: "2024-01-15", bodyScore: 4, mindScore: 3, mainSymptom: "特になし" },
@@ -190,12 +191,12 @@ export default function Dashboard({ onNavigate, currentUser }: DashboardProps) {
       {/* クイックアクション */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <Button
-          onClick={() => handleQuickAction("initial-results")}
+          onClick={() => onStartQuestionnaire && onStartQuestionnaire()}
           variant="outline"
           className="h-20 flex-col space-y-2 border-2 border-slate-200 hover:border-blue-300 hover:bg-blue-50"
         >
           <FileText className="w-6 h-6 text-blue-600" />
-          <span className="text-sm">初回問診結果</span>
+          <span className="text-sm">体質チェック</span>
         </Button>
         <Button
           onClick={() => handleQuickAction("wellness-advice")}
