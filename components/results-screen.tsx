@@ -14,17 +14,17 @@ export default function ResultsScreen({ scores, onSaveCallback, onRetakeQuiz }: 
   // 気血水のデータ
   const qiBloodFluidData = [
     {
-      category: "気虚",
+      category: "気",
       score: scores["気虚"] || 0,
       maxScore: 5,
     },
     {
-      category: "血虚",
+      category: "血",
       score: scores["血虚"] || 0,
       maxScore: 5,
     },
     {
-      category: "水滞",
+      category: "水",
       score: scores["水滞"] || 0,
       maxScore: 5,
     },
