@@ -50,7 +50,6 @@ export async function generateTongueDiagnosis(imageBase64: string) {
       maxTokens: 1000,
     })
 
-    // JSONレスポンスをパース
     const diagnosis = JSON.parse(text) as TongueDiagnosisResult
     diagnosis.timestamp = new Date().toISOString()
 
@@ -61,7 +60,6 @@ export async function generateTongueDiagnosis(imageBase64: string) {
   } catch (error) {
     console.error("Tongue diagnosis error:", error)
 
-    // フォールバック診断
     const fallbackDiagnosis: TongueDiagnosisResult = {
       observations: {
         color: "淡紅",
@@ -95,8 +93,8 @@ export async function generateTongueDiagnosis(imageBase64: string) {
   }
 }
 
-// 舌診データベースから体質に基づくアドバイスを取得
-export function getConstitutionAdvice(constitutions: string[]) {
+// 舌診データベースから体質に基づくアドバイスを取得（アロー関数に修正）
+export const getConstitutionAdvice = (constitutions: string[]) => {
   const advice = {
     foods: [] as string[],
     avoid: [] as string[],
@@ -113,7 +111,6 @@ export function getConstitutionAdvice(constitutions: string[]) {
     }
   })
 
-  // 重複を除去
   advice.foods = [...new Set(advice.foods)]
   advice.avoid = [...new Set(advice.avoid)]
   advice.lifestyle = [...new Set(advice.lifestyle)]
