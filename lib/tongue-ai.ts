@@ -17,7 +17,7 @@ interface TongueDiagnosisResult {
   timestamp: string
 }
 
-export async function generateTongueDiagnosis(imageBase64: string) {
+export async function getConstitutionAdvice(constitutions: string[]) {
   try {
     const prompt = `
 あなたは中医学に精通した舌診の専門家です。アップロードされた舌の画像を分析して、以下の形式でJSONレスポンスを返してください。
