@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import DailyHealthCheck from "@/components/daily-health-check";
-import Dashboard from "@/components/Dashboard";
+import Dashboard from "@/components/dashboard"; // 小文字に注意
 import GuestDashboard from "@/components/GuestDashboard";
 
-export default function DailyCheckPage() {
+export default function DashboardPage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
